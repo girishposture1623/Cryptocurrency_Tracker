@@ -105,12 +105,22 @@ fetchCrypto();
 
 
 async function news() {
-  const response = await fetch(nwesurl)
-  const data = await response.json()
-  // console.log(data.articles)
-  const disp = data.articles
-  showNews(disp)
-  // searh(disp)
+  try {
+    const response = await fetch(newsUrl)
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    const data = await response.json()
+
+    if (!data.articles) {
+      console.error('No articles found:', data)
+      return
+    }
+
+    showNews(data.articles)
+  } catch (err) {
+    console.error('Fetch error:', err)
+  }
 }
 news()
 
@@ -139,3 +149,4 @@ function showNews(data) {
   })
 
 }
+
