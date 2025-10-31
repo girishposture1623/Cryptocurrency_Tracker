@@ -106,7 +106,7 @@ fetchCrypto();
 
 async function news() {
   try {
-    const response = await fetch(newsUrl)
+    const response = await fetch(nwesurl)
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
@@ -149,4 +149,5 @@ function showNews(data) {
   })
 
 }
+
 
