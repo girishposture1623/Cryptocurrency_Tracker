@@ -106,20 +106,13 @@ fetchCrypto();
 
 async function news() {
   try {
-    const response = await fetch(nwesurl)
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
-    const data = await response.json()
-
-    if (!data.articles) {
-      console.error('No articles found:', data)
-      return
-    }
-
-    showNews(data.articles)
+    const response = await fetch('https://newsapi.org/v2/everything?q=crypto&curency=today&sortBy=publishedAt&apiKey=7ed18bf836014219a8d2e5a1b0d08960');
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const data = await response.json();
+    if (!data.articles) return console.error('No articles found:', data);
+    showNews(data.articles);
   } catch (err) {
-    console.error('Fetch error:', err)
+    console.error('Fetch error:', err);
   }
 }
 news()
@@ -149,5 +142,6 @@ function showNews(data) {
   })
 
 }
+
 
 
