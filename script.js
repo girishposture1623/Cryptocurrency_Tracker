@@ -1,5 +1,6 @@
 const Url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
-const nwesurl = 'https://newsapi.org/v2/everything?q=crypto&curency=today&sortBy=publishedAt&apiKey=7ed18bf836014219a8d2e5a1b0d08960'
+const nwesurl  = 'https://newsapi.org/v2/everything?q=crypto&curency=today&sortBy=publishedAt&apiKey=7ed18bf836014219a8d2e5a1b0d08960'
+
 
 
 const table = document.getElementById("table");
@@ -105,20 +106,12 @@ fetchCrypto();
 
 
 async function news() {
-  try {
-    const url = 'https://newsapi.org/v2/everything?q=today&sortBy=publishedAt&apiKey=7ed18bf836014219a8d2e5a1b0d08960';
-
-    const proxy = 'https://cors-anywhere.herokuapp.com/';
-    const response = await fetch(proxy + url);
-
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-
-    const data = await response.json();
-    if (!data.articles) return console.error('No articles found:', data);
-    showNews(data.articles);
-  } catch (err) {
-    console.error('Fetch error:', err);
-  }
+  const response = await fetch(nwesurl)
+  const data = await response.json()
+  // console.log(data.articles)
+  const disp = data.articles
+  showNews(disp)
+  // searh(disp)
 }
 news()
 
@@ -143,11 +136,7 @@ function showNews(data) {
         open(imageurl)
       }
     })
-    show.append(title,image)
+    show.append(title, image)
   })
 
 }
-
-
-
-
