@@ -106,8 +106,13 @@ fetchCrypto();
 
 async function news() {
   try {
-    const response = await fetch('https://newsapi.org/v2/everything?q=crypto&curency=today&sortBy=publishedAt&apiKey=7ed18bf836014219a8d2e5a1b0d08960');
+    const url = 'https://newsapi.org/v2/everything?q=today&sortBy=publishedAt&apiKey=7ed18bf836014219a8d2e5a1b0d08960';
+
+    const proxy = 'https://cors-anywhere.herokuapp.com/';
+    const response = await fetch(proxy + url);
+
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
     const data = await response.json();
     if (!data.articles) return console.error('No articles found:', data);
     showNews(data.articles);
@@ -142,6 +147,7 @@ function showNews(data) {
   })
 
 }
+
 
 
 
